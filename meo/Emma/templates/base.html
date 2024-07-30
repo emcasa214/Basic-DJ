@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type = "text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/home.css">
+    <link rel="stylesheet" href="static/css/base.css">
+    <link rel="stylesheet" href="static/js/base.js">
+    <title>{%block title%}{%endblock%}</title>
+</head>
+<body>
+    <!-- <div class="container-fluid">
+
+    </div> -->
+    <div class="sidebar">
+        <button class="glyphicon glyphicon-user icon" onclick="changeColor(this)"></button>
+        <a href="{% url 'tasks' %}">
+            <button class="glyphicon glyphicon-th-list icon" onclick="changeColor(this)"></button>
+        </a>
+        <button class="glyphicon glyphicon-calendar icon" onclick="changeColor(this)"></button>
+        <button class="glyphicon glyphicon-time icon" onclick="changeColor(this)"></button>
+    </div>
+    <div class="content">
+        {%block content %}
+        
+        {%endblock%}
+    </div>
+</body>
+</html>

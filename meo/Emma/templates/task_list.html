@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Task List</h1>
+
+<input type="text" id="taskInput" placeholder="Enter a new task">
+
+<ul id="taskList">
+    {% for task in tasks %}
+    <li>
+        <input type="checkbox" {% if task.completed %}checked{% endif %}>
+        {{ task.title }}
+    </li>
+    {% endfor %}
+</ul>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#taskInput').keypress(function(e) {
+        if (e.which == 13) {  // Enter key
+            var taskTitle = $(this).val();
+            $.ajax({
+                url: '{% url "task" %}',
+                type: 'POST',
+                data: {
+                    'title': taskTitle,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $('#taskList').prepend('<li><input type="checkbox">' + data.title + '</li>');
+                    $('#taskInput').val('');
+                }
+            });
+        }
+    });
+});
+</script>
+{% endblock %}
